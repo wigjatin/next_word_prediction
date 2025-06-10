@@ -1,129 +1,67 @@
-Next Word Prediction using LSTM
-https://via.placeholder.com/800x400?text=Next+Word+Prediction+Demo
-Live Demo: https://nextwordprediction-jatinwig.streamlit.app/
+# Next Word Prediction System with LSTM
 
-Overview
-This project implements a next word prediction model using TensorFlow and LSTM neural networks. The model analyzes sequences of words to predict the most probable next word in a sentence, with applications in keyboard suggestions, autocompletion systems, and natural language processing workflows.
+A high-performance next word prediction model built using Natural Language Processing (NLP) techniques and deep learning. This project uses a custom-trained LSTM-based neural network to predict the most probable word following a given sequence of three words.
 
-Key Features
-LSTM-based neural network for sequence prediction
+---
 
-Tokenization and text preprocessing pipeline
+## Problem Statement
 
-Top-5 word predictions with probability scores
+Typing assistants and writing tools benefit greatly from intelligent word prediction systems. From chat apps to email clients and content editors, predicting the next word boosts productivity and enhances user experience.
 
-Streamlit-powered web interface
+This project builds an effective word predictor to suggest the most likely next word based on context.
 
-Easy-to-deploy model architecture
+---
 
-Live Demo
-Experience the model in action:
-https://nextwordprediction-jatinwig.streamlit.app/
+## Features
 
-Model Architecture
-python
-model = Sequential()
-model.add(Embedding(vocab_size, 10, input_length=3))
-model.add(LSTM(1000, return_sequences=True))
-model.add(LSTM(1000))
-model.add(Dense(1000, activation='relu'))
-model.add(Dense(vocab_size, activation="softmax"))
-Requirements
-Python 3.8+
+- Trained on a custom English text corpus
+- Keras Tokenizer for text preprocessing
+- Sequential LSTM architecture with dense layers
+- Achieves highly relevant top-5 word predictions
+- Pickled tokenizer and saved model for inference
+- Streamlit-based live demo for interactive usage
 
-TensorFlow 2.x
+---
 
-NumPy
+## Model Selection
 
-scikit-learn
+After evaluating several sequence modeling approaches, **LSTM (Long Short-Term Memory)** was selected due to its:
 
-Streamlit
+- Strong performance on sequence and context understanding
+- Ability to learn temporal dependencies in language
+- Scalability for longer training on larger corpora
 
-Pickle
+---
 
-Installation
-bash
-# Clone the repository
-git clone https://github.com/wigjatin/next_word_prediction.git
-cd next_word_prediction
+## Performance
 
-# Install dependencies
-pip install -r requirements.txt
-Usage
-Training the Model:
+| Model          | Layers   | Optimizer | Notes                     |
+|----------------|----------|-----------|----------------------------|
+| LSTM (final)   | 2 LSTM + Dense | Adam     | Top-5 predictions highly relevant |
+| Simple RNN     | 1 RNN + Dense | Adam     | Lower accuracy and context retention |
+| GRU            | 1 GRU + Dense | Adam     | Competitive but LSTM had better results |
 
-python
-python train.py
-Running the Streamlit App:
+---
 
-bash
-streamlit run app.py
+## Tech Stack
 
-Project Structure
-text
-next_word_prediction/
-├── app.py                # Streamlit application
-├── train.py              # Model training script
-├── predict.py            # Prediction functions
-├── next_words.h5         # Trained model weights
-├── token.pkl             # Tokenizer object
-├── data.txt              # Training dataset
-├── requirements.txt      # Python dependencies
-└── README.md
-Training Parameters
-Parameter	Value
-Epochs	2
-Batch Size	64
-Learning Rate	0.001
-Sequence Length	3 words
-Vocabulary Size	11,000+
-Embedding Dimension	10
-LSTM Units	1000
-How It Works
-Text Preprocessing:
+- Python 
+- TensorFlow / Keras
+- NumPy / Pickle
+- Streamlit (for frontend demo)
 
-Load and clean text data
+---
 
-Tokenize words and create sequences
+## Text Preprocessing
 
-Model Training:
+- Cleaning whitespaces, quotes, newline characters
+- Lowercasing
+- Tokenization via Keras `Tokenizer`
+- Creating sequences of 4 words: first 3 as input, last as label
+- One-hot encoding of labels using `to_categorical`
 
-Create embedding layer for word representations
+---
 
-Stack LSTM layers to capture sequence patterns
-
-Use dense layers for final predictions
-
-Prediction:
-
-Convert input text to token sequences
-
-Use trained model to predict top 5 next words
-
-Display results in user-friendly format
-
-Contributing
-Contributions are welcome! Please follow these steps:
-
-Fork the repository
-
-Create a new branch (git checkout -b feature/your-feature)
-
-Commit your changes (git commit -am 'Add some feature')
-
-Push to the branch (git push origin feature/your-feature)
-
-Open a pull request
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Contact
-For questions or feedback, please contact:
-
-Jatin Wig - wigjatin2@gmail.com
-
-Project Repository: https://github.com/wigjatin/next_word_prediction
-
-Experience the live demo: https://nextwordprediction-jatinwig.streamlit.app/
-
+## Demo
+You can access the live demo of the application by visiting the following link:  
+[View Demo](https://nextwordprediction-jatinwig.streamlit.app/)
